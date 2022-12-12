@@ -154,7 +154,8 @@ public class GUIPianoCartesiano extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int y1, x2, y2;
+        int y1, y2;
+        float x2;
         int a, b, c;
         float[] hsb = Color.RGBtoHSB(50, 100, 50,null);
         Graphics piano = jPanel2.getGraphics();
@@ -177,13 +178,17 @@ public class GUIPianoCartesiano extends javax.swing.JFrame {
         }
         
         piano.setColor(Color.getHSBColor(hsb[0],hsb[1],hsb[2]));
-        for (int i = -15; i < 15; i++) {
-            y1 = (a * i * i) + b * i + c;
+        for (float i = -15f; i < 15f; i+= 0.5f) {
+            i = Math.round(i);
+            y1 =(int) ((a * i * i) + b * i + c) * 10 * -1;
             //y = 1 * -15 + 1;
             //y = -14
-            x2 = i + 1;
-            y2 = (a * x2 * x2) + b * x2 + c;
-            piano.drawLine(i * 10, y1 * -1 * 10, x2 * 10, y2 * -1 * 10);
+            x2 = Math.round(i + 0.5f);
+            y2 =(int) ((a * x2 * x2) + b * x2 + c) * 10 * -1;
+            
+            y1 = Math.round(y1);
+            y2 = Math.round(y2);
+            piano.drawLine((int)i * 10,y1,(int)x2 * 10,y2);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
